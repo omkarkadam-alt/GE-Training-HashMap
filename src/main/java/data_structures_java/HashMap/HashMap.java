@@ -20,7 +20,6 @@ public class HashMap <K,V> {
     public int getBucketIndex(K key){
         int hash = Math.abs(key.hashCode());
         int index = hash % numberOfBuckets;
-        System.out.println("Key: " + key + " Hash: " + hash + " Index: " + index);
         return index;
     }
 
@@ -68,20 +67,15 @@ public class HashMap <K,V> {
         LinkedList<K, V> myLinkedList = this.map.get(bucketIndex);
 
         if(myLinkedList == null){
-            System.out.println("Did not found LL for " + key);
             LinkedList<K,V> newLinkedList = new LinkedList<>();
             this.map.set(bucketIndex, newLinkedList);
             this.map.get(bucketIndex).add(key, value);
         }else{
-
-            System.out.println("Found LL for " + key);
             MyMapNode<K,V> searchResult = myLinkedList.search(key);
             
             if(searchResult == null){
-                System.out.println("Adding the value");
                 myLinkedList.add(key, value);
             }else{
-                System.out.println("Updating the value");
                 myLinkedList.update(key, value);
             }
         }

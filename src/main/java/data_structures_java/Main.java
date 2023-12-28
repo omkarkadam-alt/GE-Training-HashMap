@@ -62,7 +62,6 @@ public class Main {
             }else{
                 myMap.put(currWord, 1);
             }
-            myMap.display();
         }
 
         myMap.display();
