@@ -17,7 +17,27 @@ public class Main {
             }
         }
 
-        return outputString.toString();
+        StringBuilder finalOutputString = new StringBuilder();
+
+        int i = 0;
+        int spaceCount = 0;
+        while(i < outputString.length()){
+            if(outputString.charAt(i) == ' ')
+            {
+                if(spaceCount == 0){
+                    finalOutputString.append(" ");
+                    spaceCount++;
+                } else { 
+                    spaceCount++;                
+                }
+            }else{
+                finalOutputString.append(outputString.charAt(i));
+                spaceCount = 0;
+            }
+            i++;
+        }
+
+        return finalOutputString.toString();
     }
     public static void main(String[] args) {
         
@@ -25,17 +45,24 @@ public class Main {
 
         myMap.display();
 
-        String inputString = "To be or not to be";
+        String inputString = "Paranoids are not\n" + //
+                "                                paranoid because they are paranoid but\n" + //
+                "                                because they keep putting themselves\n" + //
+                "                                deliberately into paranoid avoidable\n" + //
+                "                                situations";
+
         String formattedInputString = cleanString(inputString);
         String words[] = formattedInputString.split(" ");
         
         for(String currWord: words){
 
             if(myMap.find(currWord)){
-                myMap.put(currWord, myMap.get(currWord) + 1);
+                int updatedFreq = myMap.get(currWord) + 1;
+                myMap.put(currWord, updatedFreq);
             }else{
                 myMap.put(currWord, 1);
             }
+            myMap.display();
         }
 
         myMap.display();
